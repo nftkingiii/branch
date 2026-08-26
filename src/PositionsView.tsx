@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { formatRawAmount, type PositionSnapshot, type PositionsResponse } from "../shared/positions";
-import { readBranchExecutions } from "./branch-store";
+import { deriveBranchProgress } from "../shared/branch-progress";
+import type { BranchPlan, LiveMarket } from "../shared/branch";
+import { readBranchExecutions, rememberContinuation, type StoredBranchExecution } from "./branch-store";
 import type { ExecutionReceipt, WalletSession } from "./wallet";
 
 const explorer = "https://shannon-explorer.somnia.network/tx/";
@@ -26,7 +28,12 @@ export function PositionsView({ wallet, onCompose }: { wallet: WalletSession; on
   const [loading, setLoading] = useState(true);
   const [claiming, setClaiming] = useState<string | null>(null);
   const [claimReceipt, setClaimReceipt] = useState<ExecutionReceipt | null>(null);
-  const executions = useMemo(() => readBranchExecutions(wallet.address), [wallet.address, data]);
+  const [executionVersion, setExecutionVersion] = useState(0);
+  const [continuation, setContinuation] = useState<{ execution: StoredBranchExecution; index: number; market: LiveMarket } | null>(null);
+  const [continuationAcknowledged, setContinuationAcknowledged] = useState(false);
+  const [continuing, setContinuing] = useState(false);
+  const [continuationReceipt, setContinuationReceipt] = useState<ExecutionReceipt | null>(null);
+  const executions = useMemo(() => readBranchExecutions(wallet.address), [wallet.address, data, executionVersion]);
 
   const refresh = useCallback(async (quiet = false) => {
     if (!quiet) setLoading(true);
@@ -65,6 +72,69 @@ export function PositionsView({ wallet, onCompose }: { wallet: WalletSession; on
     }
   };
 
+  const prepareContinuation = async (execution: StoredBranchExecution, index: number) => {
+    setError("");
+    setContinuationReceipt(null);
+    try {
+      const response = await fetch("/api/markets", { headers: { Accept: "application/json" } });
+      if (!response.ok) throw new Error("Fresh markets are unavailable.");
+      const payload = await response.json() as { markets: LiveMarket[] };
+      const used = new Set(execution.legs.map((leg) => leg.marketId.toLowerCase()));
+      const market = payload.markets.find((candidate) =>
+        candidate.asset === execution.asset
+        && candidate.intervalSec === execution.intervalSec
+        && !used.has(candidate.marketId.toLowerCase()),
+      );
+      if (!market) throw new Error("No new verified market generation matches this branch yet. Refresh after the next window opens.");
+      setContinuation({ execution, index, market });
+      setContinuationAcknowledged(false);
+    } catch (prepareError) {
+      setError(prepareError instanceof Error ? prepareError.message : "The next leg could not be prepared.");
+    }
+  };
+
+  const executeContinuation = async () => {
+    if (!continuation || !continuationAcknowledged) return;
+    setContinuing(true);
+    setError("");
+    try {
+      const { execution, index, market } = continuation;
+      const plan: BranchPlan = {
+        asset: execution.asset,
+        intervalSec: execution.intervalSec,
+        budget: execution.allocation,
+        maxEntryPrice: execution.maxEntryPrice,
+        stopRule: "Stop on the first mismatched or voided outcome; never execute later legs.",
+        legs: [{
+          index,
+          expected: execution.path[index],
+          allocation: execution.allocation,
+          condition: `Continue only after leg ${index} settled ${execution.path[index - 1]}`,
+          binding: {
+            kind: "market",
+            marketId: market.marketId,
+            expiry: market.expiry,
+            venueId: market.venueId,
+            poolAddress: market.poolAddress,
+          },
+        }],
+      };
+      const { executeBoundLeg } = await import("./wallet");
+      const confirmed = await executeBoundLeg(plan, wallet);
+      if (!confirmed.fills) throw new Error("The IOC closed without a fill, so this leg remains ready to retry.");
+      rememberContinuation(execution, { index, marketId: market.marketId, txHash: confirmed.hash, expiry: market.expiry });
+      setExecutionVersion((value) => value + 1);
+      setContinuationReceipt(confirmed);
+      setContinuation(null);
+      setContinuationAcknowledged(false);
+      await refresh(true);
+    } catch (continuationError) {
+      setError(continuationError instanceof Error ? continuationError.message : "The continuation order was not confirmed.");
+    } finally {
+      setContinuing(false);
+    }
+  };
+
   const liveCapital = (data?.positions ?? [])
     .filter((position) => position.lifecycle === "live" || position.lifecycle === "settling")
     .reduce((sum, position) => sum + Number(formatRawAmount(position.costBasisRaw, position.quoteDecimals, 6)), 0);
@@ -98,6 +168,48 @@ export function PositionsView({ wallet, onCompose }: { wallet: WalletSession; on
           <a href={`${explorer}${claimReceipt.hash}`} target="_blank" rel="noreferrer">View settlement transaction ↗</a>
         </div>
       )}
+      {continuationReceipt && (
+        <div className="claim-confirmation" role="status">
+          <span>Next leg filled and monitoring started</span>
+          <a href={`${explorer}${continuationReceipt.hash}`} target="_blank" rel="noreferrer">View continuation transaction ↗</a>
+        </div>
+      )}
+
+      {data && executions.length > 0 && (
+        <section className="continuation-section">
+          <div className="activity-heading"><div><span>Conditional workflow</span><h2>Continuation queue</h2></div><p>Each next leg requires a fresh market check and wallet signature</p></div>
+          <div className="continuation-list">
+            {executions.map((execution) => {
+              const progress = deriveBranchProgress(execution, data);
+              const nextLegIndex = progress.nextLegIndex;
+              return (
+                <article className={`continuation-row ${progress.state}`} key={execution.legs[0].txHash}>
+                  <div><span>{execution.asset} · {execution.intervalSec / 60}m</span><strong>Leg {execution.legs.length} of {execution.path.length}</strong></div>
+                  <ol aria-label="Branch execution progress">
+                    {execution.path.map((outcome, index) => <li className={index < execution.legs.length ? "executed" : index === progress.nextLegIndex ? "ready" : "locked"} key={`${outcome}-${index}`}><b>{index + 1}</b><span>{outcome}</span></li>)}
+                  </ol>
+                  <div className="continuation-state">
+                    <span>{progress.state === "ready" ? `Leg ${Number(progress.nextLegIndex) + 1} unlocked` : progress.state}</span>
+                    {progress.state === "ready" && nextLegIndex != null && <button type="button" onClick={() => void prepareContinuation(execution, nextLegIndex)}>Review next leg</button>}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+          {continuation && (
+            <div className="continuation-review">
+              <div><span>Freshly bound market</span><h3>Leg {continuation.index + 1}: {continuation.execution.path[continuation.index]}</h3><p>{continuation.execution.asset} · {continuation.execution.intervalSec / 60}m · expires {new Date(continuation.market.expiry * 1000).toLocaleString()}</p></div>
+              <dl className="order-review">
+                <div><dt>Action</dt><dd>IOC BUY {continuation.execution.path[continuation.index] === "UP" ? "YES" : "NO"}</dd></div>
+                <div><dt>Max loss</dt><dd>{continuation.execution.allocation.toFixed(2)} tUSDC</dd></div>
+                <div><dt>Limit</dt><dd>{Math.round(continuation.execution.maxEntryPrice * 100)}¢</dd></div>
+              </dl>
+              <label className="risk-check"><input type="checkbox" checked={continuationAcknowledged} onChange={(event) => setContinuationAcknowledged(event.target.checked)} /><span>I reviewed this new market generation, outcome, probability cap, and maximum testnet loss.</span></label>
+              <div className="continuation-review-actions"><button type="button" className="secondary-button" onClick={() => setContinuation(null)} disabled={continuing}>Cancel</button><button type="button" className="execute-button" disabled={!continuationAcknowledged || continuing} onClick={() => void executeContinuation()}>{continuing ? "Waiting for confirmed receipt…" : `Sign and execute leg ${continuation.index + 1}`}</button></div>
+            </div>
+          )}
+        </section>
+      )}
 
       {loading && !data ? (
         <div className="positions-empty"><img src="/branch-glyph.svg" alt="" /><p>Reading outcome balances and checking each market on-chain…</p></div>
@@ -105,7 +217,7 @@ export function PositionsView({ wallet, onCompose }: { wallet: WalletSession; on
         <div className="position-list">
           {data.positions.map((position) => {
             const meta = lifecycleCopy[position.lifecycle];
-            const execution = executions.find((item) => item.marketId === position.marketId.toLowerCase());
+            const execution = executions.find((item) => item.legs.some((leg) => leg.marketId === position.marketId.toLowerCase()));
             const pnl = formatRawAmount(position.unrealizedPnlRaw, position.quoteDecimals, 2);
             const claimKey = `${position.marketId}:${position.outcomeIndex}`;
             return (
@@ -134,7 +246,7 @@ export function PositionsView({ wallet, onCompose }: { wallet: WalletSession; on
 
                 {execution && (
                   <div className="stored-path" aria-label="Saved branch path">
-                    <div><span>Saved path</span><strong>{position.lifecycle === "lost" || position.lifecycle === "voided" ? "Stopped at leg 1" : "Leg 1 monitored"}</strong></div>
+                    <div><span>Saved path</span><strong>{position.lifecycle === "lost" || position.lifecycle === "voided" ? "Stopped on this leg" : `${execution.legs.length} leg${execution.legs.length === 1 ? "" : "s"} executed`}</strong></div>
                     <ol>
                       {execution.path.map((outcome, index) => (
                         <li className={index === 0 ? position.lifecycle : "locked"} key={`${outcome}-${index}`}>

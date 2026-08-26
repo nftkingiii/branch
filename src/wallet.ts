@@ -156,7 +156,7 @@ export async function claimPosition(session: WalletSession, requested: PositionS
   }
 }
 
-export async function executeFirstLeg(plan: BranchPlan, session: WalletSession): Promise<ExecutionReceipt> {
+export async function executeBoundLeg(plan: BranchPlan, session: WalletSession): Promise<ExecutionReceipt> {
   const intent = createExecutionIntent(plan);
   if (Math.floor(Date.now() / 1000) + 20 >= Number(intent.expiryTimestampNs / 1_000_000_000n)) {
     throw new Error("This market is too close to expiry. Refresh and review a new branch.");
@@ -221,3 +221,5 @@ export async function executeFirstLeg(plan: BranchPlan, session: WalletSession):
   if (result.receipt.status !== "success") throw new Error("The order transaction reverted.");
   return { hash: result.hash, status: "success", blockNumber: result.receipt.blockNumber, fills: result.fills.length, orderId: result.orderId };
 }
+
+export const executeFirstLeg = executeBoundLeg;

@@ -45,7 +45,7 @@ export function createExecutionIntent(plan: BranchPlan): ExecutionIntent {
   const yesLimitPrice = parsed.outcome === "UP" ? selectedOutcomePrice : SCALE - selectedOutcomePrice;
   const stake = BigInt(Math.floor(parsed.allocation * Number(SCALE)));
   const quantity = (stake * SCALE) / selectedOutcomePrice;
-  if (quantity <= 0n) throw new Error("The first-leg allocation is below the executable minimum.");
+  if (quantity <= 0n) throw new Error("The leg allocation is below the executable minimum.");
 
   return {
     marketId: parsed.marketId as `0x${string}`,
@@ -73,6 +73,6 @@ export function alignExecutionIntent(
     : remainder === 0n ? intent.yesLimitPrice : intent.yesLimitPrice + params.tickSize - remainder;
   const quantity = intent.quantity - (intent.quantity % params.lotSize);
   if (yesLimitPrice <= 0n || yesLimitPrice >= SCALE) throw new Error("The aligned probability limit is not executable.");
-  if (quantity < params.minQuantity) throw new Error("The first-leg allocation is below DreamDEX's minimum order size.");
+  if (quantity < params.minQuantity) throw new Error("The leg allocation is below DreamDEX's minimum order size.");
   return { yesLimitPrice, quantity };
 }

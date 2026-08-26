@@ -1,7 +1,7 @@
 # Project State
 
-Updated: `2026-08-26 11:27 WAT`  
-Status: `public GitHub source and revision-verified Railway deployment are live`
+Updated: `2026-08-26 12:01 WAT`
+Status: `second-leg continuation implemented locally; public deployment still points to the prior verified revision`
 
 ## Goal
 
@@ -103,7 +103,8 @@ Choose and build a differentiated, production-ready testnet product whose core u
 ## Current Work
 
 - Complete: read-only scenario composer, verified-market API, termination-state logic, reference-led responsive visual system, provider-error diagnostics, wallet review flow, STT/TestUSDC funding UX, disconnected-state QA, and on-chain-checked Positions lifecycle UI.
-- Next: implement and prove the second wallet-approved leg after a winning first-leg settlement; choose a repository license and complete submission evidence.
+- Implemented locally: a schema-validated multi-leg execution ledger and continuation queue. A finalized matching outcome unlocks the next leg; Branch then binds a different freshly verified market generation, shows the retained allocation/cap for explicit acknowledgement, and requires a new wallet-signed IOC transaction. Missing evidence, loss, or void fails closed.
+- Next: browser-QA and deploy the continuation UI, then prove leg 2 with a real testnet fill and on-chain read-back; choose a repository license and complete submission evidence.
 
 ## Resume Notes
 
