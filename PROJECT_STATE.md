@@ -1,6 +1,6 @@
 # Project State
 
-Updated: `2026-08-26 17:48 WAT`
+Updated: `2026-08-26 19:03 WAT`
 Status: `judge-ready written package prepared; final video and submission receipt remain blocking`
 
 ## Goal
@@ -29,6 +29,7 @@ Choose and build a differentiated, production-ready testnet product whose core u
 - Keep signing in an injected browser wallet and require an explicit first-leg risk acknowledgement; never accept or store a private key - 2026-08-25.
 - Use IOC orders only for the first proof transaction, with price/quantity aligned to DreamDEX's on-chain tick and lot grid - 2026-08-25.
 - Treat funding as a visible three-step testnet workflow: acquire STT gas, connect a burner wallet, then mint faucet TestUSDC inside Branch - 2026-08-25.
+- Replace the infrastructure-style Overview banner with a product-mechanism narrative and compact public proof rail; keep chain/testnet context subordinate to the main job rather than as a full-width status surface - 2026-08-26.
 
 ## Evidence and Verification
 
@@ -97,6 +98,7 @@ Choose and build a differentiated, production-ready testnet product whose core u
 - The earlier dynamic wallet import error was a stale-release mismatch: removed `/assets/wallet-BJ1YseQV.js` was incorrectly served as SPA `text/html` with HTTP 200, while HTML had no explicit cache policy. Release `6c61eec` fixed this: HTML is `no-store`, hashed assets are immutable, and missing `/assets/*` requests return true no-store JSON 404 responses.
 - Real continuation proof is complete. Leg one bought BTC 15m DOWN in market `0x...a11d` through transaction `0x2a454a837ceff6266df5e9dce82ddef97e8c59be52a6d8bff69b3211b8558635`, settled DOWN, realized `+16.661233` tUSDC, and was redeemed in `0x9e30adc3d2a966ab1c49d071aba176ab61cd8cbaf6b80f76723789de32417fd9`. Branch then bound different market `0x...a143` and the wallet signed leg-two UP fill `0xe439f1b241bfbbb21dcd94d098003e733c25ba977245c185a2a7d8d3c495ca2c`; three fills totaled `666.666` YES tokens with `18.02331` tUSDC cost basis. That market finalized DOWN, so leg two lost, its payout is zero, and the branch correctly stopped. The two-leg path net position result was `-1.362077` tUSDC before gas.
 - Added the MIT license, current README architecture/evidence links, `SUBMISSION.md`, sponsor-facing `FEEDBACK.md`, and a 2:30 muted-playback demo script with editable SRT captions. These are prepared artifacts, not evidence that a final video has been recorded or submitted.
+- Overview now explains Branch as bind, resolve, then continue-or-stop and presents the verified two-leg Shannon run with direct explorer links, exact realized values, and the leg-two hard stop. Local browser QA at 1280px confirmed one instance of each section, aligned proof geometry, and zero document-level horizontal overflow; 32 tests passed and the production build completed with 630 modules transformed.
 - Current official/event-organizer-linked sources confirm the event runs online with a 5000 USDso pool. Direct DoraHacks schedule readout supplied by the user confirms the deadline as September 8, 2026 at 19:00 WAT (`18:00 UTC`). Direct user report after organizer confirmation: no live presentation is required and presentation attendance does not control final judging. The final video and eventual submission receipt remain unresolved.
 
 ## Sources

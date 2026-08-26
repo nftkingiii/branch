@@ -208,24 +208,73 @@ export function App() {
 
       {activeTab === "overview" ? (
         <div className="tab-panel" role="tabpanel" aria-label="Overview">
-      <section className="hero" id="overview">
-        <div className="hero-copy">
-          <h1>Trade the path,<br />not one candle.</h1>
-          <p>Compose a conditional BTC or ETH thesis. Each DreamDEX contract activates only when the previous outcome resolves exactly as expected.</p>
-          <button className="hero-link" type="button" disabled={walletConnecting} onClick={openComposer}>{walletConnecting ? "Connecting wallet…" : "Compose a path"} <span aria-hidden="true">↘</span></button>
-        </div>
-        <div className="hero-visual" aria-label="A luminous three-way conditional path">
-          <img src="/assets/branch-path-core.png" alt="" />
-          <div className="visual-note note-one"><b>01</b><span>Verified market</span></div>
-          <div className="visual-note note-two"><b>03</b><span>Conditional legs</span></div>
-          <p>One live contract.<br />Three possible continuations.</p>
-        </div>
-      </section>
+          <section className="hero" id="overview">
+            <div className="hero-copy">
+              <h1>Trade the path,<br />not one candle.</h1>
+              <p>Compose a conditional BTC or ETH thesis. Each DreamDEX contract activates only when the previous outcome resolves exactly as expected.</p>
+              <button className="hero-link" type="button" disabled={walletConnecting} onClick={openComposer}>{walletConnecting ? "Connecting wallet…" : "Compose a path"} <span aria-hidden="true">↘</span></button>
+              <div className="hero-footnote">
+                <span>Somnia Shannon</span>
+                <span>Testnet execution</span>
+                <span>{marketError ? "Market verification unavailable" : "Live markets verified"}</span>
+              </div>
+            </div>
+            <div className="hero-visual" aria-label="A luminous three-way conditional path">
+              <img src="/assets/branch-path-core.png" alt="" />
+              <div className="visual-note note-one"><b>01</b><span>Verified market</span></div>
+              <div className="visual-note note-two"><b>03</b><span>Conditional legs</span></div>
+              <p>One live contract.<br />Three possible continuations.</p>
+            </div>
+          </section>
 
-      <div className="verification-strip">
-        <div><span className={marketError ? "status-dot error" : "status-dot"} /><strong>{marketError ? "Market read blocked" : "Somnia Shannon testnet"}</strong><span className="network-chip">50312</span></div>
-        <p>Wallet execution is locally signed · Every first leg is re-verified immediately before its prompt</p>
-      </div>
+          <section className="overview-logic" aria-labelledby="overview-logic-title">
+            <div className="overview-logic-intro">
+              <h2 id="overview-logic-title">A thesis that waits<br />for reality.</h2>
+              <p>Branch never submits the whole path at once. Every next leg remains dormant until the prior market settles in your chosen direction.</p>
+            </div>
+            <ol className="logic-path">
+              <li>
+                <span>01</span>
+                <div><strong>Bind</strong><p>Choose a verified live contract and the outcome you expect.</p></div>
+              </li>
+              <li>
+                <span>02</span>
+                <div><strong>Resolve</strong><p>Wait for the market's on-chain settlement, not an indexer guess.</p></div>
+              </li>
+              <li>
+                <span>03</span>
+                <div><strong>Continue or stop</strong><p>Unlock the next signature only after a match. A miss ends the branch.</p></div>
+              </li>
+            </ol>
+          </section>
+
+          <section className="overview-proof" aria-labelledby="overview-proof-title">
+            <div className="proof-heading">
+              <span>Verified Shannon run</span>
+              <h2 id="overview-proof-title">The branch advanced once.<br />Then reality stopped it.</h2>
+              <p>Public testnet evidence from one wallet-executed BTC path. Values exclude gas.</p>
+            </div>
+            <div className="proof-run">
+              <article className="proof-leg won">
+                <div><span>Leg 01</span><strong>DOWN</strong></div>
+                <p>BTC 15m settled DOWN</p>
+                <b>+16.661233 <small>tUSDC</small></b>
+                <a href="https://shannon-explorer.somnia.network/tx/0x2a454a837ceff6266df5e9dce82ddef97e8c59be52a6d8bff69b3211b8558635" target="_blank" rel="noreferrer">Inspect fill ↗</a>
+              </article>
+              <div className="proof-connector" aria-label="The matching result unlocked leg two"><span>Matched</span></div>
+              <article className="proof-leg lost">
+                <div><span>Leg 02</span><strong>UP</strong></div>
+                <p>BTC 15m settled DOWN</p>
+                <b>−18.023310 <small>tUSDC</small></b>
+                <a href="https://shannon-explorer.somnia.network/tx/0xe439f1b241bfbbb21dcd94d098003e733c25ba977245c185a2a7d8d3c495ca2c" target="_blank" rel="noreferrer">Inspect fill ↗</a>
+              </article>
+              <div className="proof-result">
+                <span>Hard stop</span>
+                <strong>Path closed at leg 02</strong>
+                <p>Net result <b>−1.362077 tUSDC</b></p>
+              </div>
+            </div>
+          </section>
 
         </div>
       ) : activeTab === "composer" ? (
