@@ -47,4 +47,4 @@ No private key, seed phrase, or wallet credential belongs in this repository or 
 
 ## Evidence boundary
 
-Two real first-leg fills, one losing settlement, and one winning redemption have been verified on Somnia Shannon and are documented in `PROJECT_STATE.md` and `PROOF_MATRIX.md`. A public deployment does not change the prototype's testnet status.
+A real two-leg conditional path is verified on Somnia Shannon: a winning first leg unlocked a newly bound, wallet-approved second leg; that second order filled and later stopped after settling against the expected outcome. Exact fills, redemption, settlement states, and earlier adverse attempts are documented in `PROJECT_STATE.md` and `PROOF_MATRIX.md`. A public deployment does not change the prototype's testnet status.

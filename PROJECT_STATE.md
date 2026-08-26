@@ -1,7 +1,7 @@
 # Project State
 
-Updated: `2026-08-26 12:40 WAT`
-Status: `continuation failure diagnosed; resilient error and asset-cache release pending deployment`
+Updated: `2026-08-26 17:23 WAT`
+Status: `real two-leg conditional path verified; submission evidence preparation is next`
 
 ## Goal
 
@@ -70,7 +70,7 @@ Choose and build a differentiated, production-ready testnet product whose core u
 - First real fill verified in transaction `0x99c2b571a41b5ad280af10d9ad1d893890a789c8e4535feb7185f95226c27752`: wallet `0x8aab...4c4` bought `115.83` NO/DOWN tokens in BTC 15m market `0x...95cb` at an effective `0.213` tUSDC each, spending `24.67179` tUSDC after the unused escrow refund.
 - Receipt and SDK portfolio read-back agree: the IOC order filled completely, no resting order remained, and the wallet held `115.83` NO tokens before settlement.
 - On-chain settlement read-back returned status `4`, `finalized: true`, `winningOutcome: 0` (YES/UP), and `isVoided: false`. The NO/DOWN position therefore lost, has zero mark/settlement value, exposes no claimable balance, and must terminate the conditional branch before leg 2.
-- No deployed Branch contract exists; execution is wallet-signed against DreamDEX contracts and later-leg monitoring/continuation is not implemented yet.
+- No deployed Branch contract exists; every leg is wallet-signed directly against DreamDEX contracts, and later legs are bound just in time only after verified prior settlement.
 - Added a wallet-gated top-level Positions workspace. A filled first leg now saves a schema-validated local branch reference and hands off to the monitor; the monitor refreshes every 15 seconds and separates live, settling, won, claimable, lost, and voided states.
 - Added `/api/positions?account=` with checksum address validation, fixed 20-fill history, a 50-position RPC fan-out cap, a 20-second route timeout, no-store responses, stable `marketId` fill grouping, and on-chain lifecycle verification. Indexer fills derive cost basis; indexer lifecycle labels never determine settlement.
 - Live API verification for wallet `0x8aab...4c4` returned the known BTC 15m DOWN position in 3.2 seconds with `115.83` tokens, `21.3c` average entry, `24.67179` tUSDC cost basis, `-24.67179` tUSDC PnL, lifecycle `lost`, winning outcome `UP`, and the exact fill transaction hash.
@@ -91,10 +91,11 @@ Choose and build a differentiated, production-ready testnet product whose core u
 - Clean public-browser QA loaded the Overview and live Shannon status with no console warnings/errors. With no injected wallet, Compose stayed gated and displayed the expected actionable wallet message; no signing or transaction was attempted.
 - Public-repository security remediation updated Vite to `7.3.6` and Vitest to `3.2.7`. Full `npm audit` returned zero vulnerabilities, and all 127 installed packages had verified registry signatures; 65 also had provenance attestations.
 - Conditional continuation release `92127a2` deployed successfully on Railway and `/api/health` returned the exact source revision. The live homepage referenced the new `index-UCQ4uMNe.js` asset, returned 12 verified markets, retained CSP/HSTS, and passed clean disconnected-state browser inspection.
-- Continuation state tests cover verified wins, mismatches, and missing evidence; the full suite now passes 29 tests across 8 files. A real wallet-signed leg-two fill and subsequent position read-back are still required before calling the multi-leg path proven.
+- Continuation state tests cover verified wins, mismatches, and missing evidence; the release passed 32 tests across 9 files after resilient IOC-revert and static-release handling were added.
 - Wallet `0x8aab...4c4` produced a new confirmed BTC 15m DOWN fill `0x2a454a837ceff6266df5e9dce82ddef97e8c59be52a6d8bff69b3211b8558635`, later redeemed in `0x9e30adc3d2a966ab1c49d071aba176ab61cd8cbaf6b80f76723789de32417fd9`; this is the new branch's first leg, not continuation proof.
 - Two attempted leg-two transactions (`0x94c0615ee4e599ed492b6d7269126166b0ede159710e3eef9b0b18e588b4bba5` and `0x40cca5c767cc46a8d58ef1bf81d5c2156edbe55920c28dc992aa86c5f1e4430d`) reached the DreamDEX router and reverted. Parent-block replay returned selector `0xd48c4403`, decoded against the SDK contract-error table as `ImmediateOrCancelNoFill()`: approval succeeded, but quoted liquidity moved before IOC execution, and no leg-two position was created.
-- The earlier dynamic wallet import error was a stale-release mismatch: removed `/assets/wallet-BJ1YseQV.js` was incorrectly served as SPA `text/html` with HTTP 200, while HTML had no explicit cache policy. The pending fix makes HTML `no-store`, hashed assets immutable, and missing `/assets/*` requests true no-store 404 responses.
+- The earlier dynamic wallet import error was a stale-release mismatch: removed `/assets/wallet-BJ1YseQV.js` was incorrectly served as SPA `text/html` with HTTP 200, while HTML had no explicit cache policy. Release `6c61eec` fixed this: HTML is `no-store`, hashed assets are immutable, and missing `/assets/*` requests return true no-store JSON 404 responses.
+- Real continuation proof is complete. Leg one bought BTC 15m DOWN in market `0x...a11d` through transaction `0x2a454a837ceff6266df5e9dce82ddef97e8c59be52a6d8bff69b3211b8558635`, settled DOWN, realized `+16.661233` tUSDC, and was redeemed in `0x9e30adc3d2a966ab1c49d071aba176ab61cd8cbaf6b80f76723789de32417fd9`. Branch then bound different market `0x...a143` and the wallet signed leg-two UP fill `0xe439f1b241bfbbb21dcd94d098003e733c25ba977245c185a2a7d8d3c495ca2c`; three fills totaled `666.666` YES tokens with `18.02331` tUSDC cost basis. That market finalized DOWN, so leg two lost, its payout is zero, and the branch correctly stopped. The two-leg path net position result was `-1.362077` tUSDC before gas.
 
 ## Sources
 
@@ -109,7 +110,7 @@ Choose and build a differentiated, production-ready testnet product whose core u
 
 - Complete: read-only scenario composer, verified-market API, termination-state logic, reference-led responsive visual system, provider-error diagnostics, wallet review flow, STT/TestUSDC funding UX, disconnected-state QA, and on-chain-checked Positions lifecycle UI.
 - Deployed: a schema-validated multi-leg execution ledger and continuation queue. A finalized matching outcome unlocks the next leg; Branch then binds a different freshly verified market generation, shows the retained allocation/cap for explicit acknowledgement, and requires a new wallet-signed IOC transaction. Missing evidence, loss, or void fails closed.
-- Next: prove leg 2 with a real testnet fill and on-chain read-back; choose a repository license and complete submission evidence.
+- Next: choose a repository license, record the captioned two-leg demo, complete submission copy/evidence, and resolve the final-event logistics gate.
 
 ## Resume Notes
 
