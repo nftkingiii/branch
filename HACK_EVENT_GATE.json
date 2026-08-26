@@ -1,0 +1,61 @@
+{
+  "project": "Branch",
+  "hackathon": "Somnia x DreamDEX Event Contracts Hackathon",
+  "owner_timezone": "",
+  "event_contact": "",
+  "requirements": {
+    "submission_deadline": {
+      "status": "unknown",
+      "value": "",
+      "source": ""
+    },
+    "live_presentation_required": {
+      "status": "unknown",
+      "value": "",
+      "source": ""
+    },
+    "final_judging_requires_presentation": {
+      "status": "unknown",
+      "value": "",
+      "source": ""
+    },
+    "demo_day_datetime": {
+      "status": "unknown",
+      "value": "",
+      "source": ""
+    },
+    "presentation_format": {
+      "status": "unknown",
+      "value": "",
+      "source": ""
+    },
+    "attendance_link": {
+      "status": "unknown",
+      "value": "",
+      "source": ""
+    },
+    "speaking_slot": {
+      "status": "unknown",
+      "value": "",
+      "source": ""
+    },
+    "prerecorded_fallback": {
+      "status": "unknown",
+      "value": "",
+      "source": ""
+    },
+    "submission_confirmation": {
+      "status": "unknown",
+      "value": "",
+      "source": ""
+    }
+  },
+  "reminders": {
+    "calendar_event_created": false,
+    "reminder_72h": false,
+    "reminder_24h": false,
+    "reminder_2h": false,
+    "reminder_30m": false
+  },
+  "notes": []
+}
