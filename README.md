@@ -41,7 +41,7 @@ The repository includes `railway.json`. Railway builds the Vite client, starts t
 Required Railway variables:
 
 - `HOST=0.0.0.0`
-- `APP_REVISION=<git commit SHA>`
+- `APP_REVISION=<git commit SHA>` for manual uploads; GitHub deployments use Railway's source revision automatically.
 
 No private key, seed phrase, or wallet credential belongs in this repository or its deployment environment. Wallet signatures remain inside the user's injected wallet.
 

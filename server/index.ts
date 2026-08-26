@@ -12,7 +12,7 @@ const dist = join(root, "dist");
 const port = Number(process.env.PORT ?? 8787);
 const host = process.env.HOST ?? "127.0.0.1";
 const allowedOrigin = process.env.ALLOWED_ORIGIN ?? "http://localhost:4173";
-const revision = process.env.APP_REVISION ?? "local";
+const revision = process.env.RAILWAY_GIT_COMMIT_SHA ?? process.env.APP_REVISION ?? "local";
 const rpcUrl = "https://api.infra.testnet.somnia.network/";
 const maxRpcBodyBytes = 64 * 1024;
 
@@ -28,6 +28,7 @@ function applyHeaders(headers: Record<string, string> = {}) {
     "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'",
     "X-Content-Type-Options": "nosniff",
     "X-Frame-Options": "DENY",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
     "Referrer-Policy": "no-referrer",
     ...headers,
   };
