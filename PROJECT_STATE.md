@@ -1,7 +1,7 @@
 # Project State
 
-Updated: `2026-08-26 17:23 WAT`
-Status: `real two-leg conditional path verified; submission evidence preparation is next`
+Updated: `2026-08-26 17:48 WAT`
+Status: `judge-ready written package prepared; final video and event logistics remain blocking`
 
 ## Goal
 
@@ -74,7 +74,7 @@ Choose and build a differentiated, production-ready testnet product whose core u
 - Added a wallet-gated top-level Positions workspace. A filled first leg now saves a schema-validated local branch reference and hands off to the monitor; the monitor refreshes every 15 seconds and separates live, settling, won, claimable, lost, and voided states.
 - Added `/api/positions?account=` with checksum address validation, fixed 20-fill history, a 50-position RPC fan-out cap, a 20-second route timeout, no-store responses, stable `marketId` fill grouping, and on-chain lifecycle verification. Indexer fills derive cost basis; indexer lifecycle labels never determine settlement.
 - Live API verification for wallet `0x8aab...4c4` returned the known BTC 15m DOWN position in 3.2 seconds with `115.83` tokens, `21.3c` average entry, `24.67179` tUSDC cost basis, `-24.67179` tUSDC PnL, lifecycle `lost`, winning outcome `UP`, and the exact fill transaction hash.
-- Implemented claim execution with a fresh same-origin positions read, exact account/market/outcome/amount matching, Shannon chain check, explicit wallet signing, and confirmed receipt handling. It remains unproven because this wallet has no claimable winning position.
+- Implemented claim execution with a fresh same-origin positions read, exact account/market/outcome/amount matching, Shannon chain check, explicit wallet signing, and confirmed receipt handling. Two real winning positions have since been redeemed through the wallet flow and retained in closed history.
 - Clean-browser visual QA used a local mock EIP-1193 provider only to expose the connected read-only screen; it did not sign or submit anything. The real API data rendered at 1280px and 390px with no console warnings/errors and no page-level horizontal overflow.
 - Verification: production build completed with 629 modules transformed; 25 tests passed across 7 files using a single-worker fork pool; `npm audit --omit=dev` reported 0 vulnerabilities.
 - The first reported Positions read failure was not an indexer outage: the server still running on port 8787 was the pre-Positions process from 2026-08-25. It returned the SPA `index.html` as `200 text/html` for `/api/positions`, and the new frontend correctly failed closed when JSON parsing failed. Restarting that exact Branch process loaded the current route; three consecutive reads returned `200 application/json` in 1.58-1.90 seconds.
@@ -96,6 +96,8 @@ Choose and build a differentiated, production-ready testnet product whose core u
 - Two attempted leg-two transactions (`0x94c0615ee4e599ed492b6d7269126166b0ede159710e3eef9b0b18e588b4bba5` and `0x40cca5c767cc46a8d58ef1bf81d5c2156edbe55920c28dc992aa86c5f1e4430d`) reached the DreamDEX router and reverted. Parent-block replay returned selector `0xd48c4403`, decoded against the SDK contract-error table as `ImmediateOrCancelNoFill()`: approval succeeded, but quoted liquidity moved before IOC execution, and no leg-two position was created.
 - The earlier dynamic wallet import error was a stale-release mismatch: removed `/assets/wallet-BJ1YseQV.js` was incorrectly served as SPA `text/html` with HTTP 200, while HTML had no explicit cache policy. Release `6c61eec` fixed this: HTML is `no-store`, hashed assets are immutable, and missing `/assets/*` requests return true no-store JSON 404 responses.
 - Real continuation proof is complete. Leg one bought BTC 15m DOWN in market `0x...a11d` through transaction `0x2a454a837ceff6266df5e9dce82ddef97e8c59be52a6d8bff69b3211b8558635`, settled DOWN, realized `+16.661233` tUSDC, and was redeemed in `0x9e30adc3d2a966ab1c49d071aba176ab61cd8cbaf6b80f76723789de32417fd9`. Branch then bound different market `0x...a143` and the wallet signed leg-two UP fill `0xe439f1b241bfbbb21dcd94d098003e733c25ba977245c185a2a7d8d3c495ca2c`; three fills totaled `666.666` YES tokens with `18.02331` tUSDC cost basis. That market finalized DOWN, so leg two lost, its payout is zero, and the branch correctly stopped. The two-leg path net position result was `-1.362077` tUSDC before gas.
+- Added the MIT license, current README architecture/evidence links, `SUBMISSION.md`, sponsor-facing `FEEDBACK.md`, and a 2:30 muted-playback demo script with editable SRT captions. These are prepared artifacts, not evidence that a final video has been recorded or submitted.
+- Current official/event-organizer-linked sources confirm the event runs online with submissions from August 25 through September 8 and a 5000 USDso pool. Exact cutoff time/timezone, presentation attendance, judging dependency, demo-day details, and fallback remain unknown and block the deterministic event gate.
 
 ## Sources
 
@@ -110,7 +112,7 @@ Choose and build a differentiated, production-ready testnet product whose core u
 
 - Complete: read-only scenario composer, verified-market API, termination-state logic, reference-led responsive visual system, provider-error diagnostics, wallet review flow, STT/TestUSDC funding UX, disconnected-state QA, and on-chain-checked Positions lifecycle UI.
 - Deployed: a schema-validated multi-leg execution ledger and continuation queue. A finalized matching outcome unlocks the next leg; Branch then binds a different freshly verified market generation, shows the retained allocation/cap for explicit acknowledgement, and requires a new wallet-signed IOC transaction. Missing evidence, loss, or void fails closed.
-- Next: choose a repository license, record the captioned two-leg demo, complete submission copy/evidence, and resolve the final-event logistics gate.
+- Next: record and publish the captioned two-leg demo, paste its URL into the submission, confirm exact deadline/presentation logistics with organizers, submit on DoraHacks, and preserve the receipt.
 
 ## Resume Notes
 

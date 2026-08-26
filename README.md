@@ -10,10 +10,30 @@ The current prototype runs on Somnia Shannon testnet (chain ID `50312`). It uses
 - Side-specific DreamDEX order-book preflight and bounded Immediate-or-Cancel execution.
 - Injected-wallet connection, Shannon network switching, STT/TestUSDC funding guidance, and explicit signing.
 - Wallet-gated Positions workspace with live, settling, claimable, lost, and voided lifecycle states.
+- Wallet-approved continuation queue that binds each later leg only after the prior outcome is verified as a match.
 - Durable closed-position history reconstructed from stable market IDs, fills, on-chain settlement, and redemption records.
 - Same-origin, allowlisted JSON-RPC proxy so browser wallet reads fail closed without exposing transaction submission.
 
-Conditional second-leg execution is not implemented yet. Later legs are currently a persisted plan and monitoring state, not an autonomous on-chain executor.
+Branch intentionally does not autonomously sign. Each unlocked continuation preserves the original risk terms, binds a fresh market generation, and requires another explicit wallet approval.
+
+## Architecture
+
+```text
+Composer → verified market selector → wallet-signed DreamDEX IOC
+                                      ↓
+Positions ← indexer discovery + on-chain settlement verification
+    ↓ matching outcome                    ↓ mismatch or void
+fresh market + new wallet signature       hard stop + closed history
+```
+
+## Public evidence
+
+- Live application: https://branch-somnia.up.railway.app
+- Submission draft: [`SUBMISSION.md`](SUBMISSION.md)
+- SDK feedback: [`FEEDBACK.md`](FEEDBACK.md)
+- Proof matrix: [`PROOF_MATRIX.md`](PROOF_MATRIX.md)
+- Demo script and captions: [`demo/DEMO_SCRIPT.md`](demo/DEMO_SCRIPT.md), [`demo/captions.srt`](demo/captions.srt)
+- Open event-logistics questions: [`ORGANIZER_QUESTIONS.md`](ORGANIZER_QUESTIONS.md)
 
 ## Local development
 
@@ -44,6 +64,10 @@ Required Railway variables:
 - `APP_REVISION=<git commit SHA>` for manual uploads; GitHub deployments use Railway's source revision automatically.
 
 No private key, seed phrase, or wallet credential belongs in this repository or its deployment environment. Wallet signatures remain inside the user's injected wallet.
+
+## License
+
+MIT — see [`LICENSE`](LICENSE).
 
 ## Evidence boundary
 

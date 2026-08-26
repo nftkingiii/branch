@@ -10,8 +10,8 @@ Updated: 2026-08-26
 | User need | Express a multi-window thesis without manually watching, claiming, and reopening each contract | User conversations or sourced research | Missing |
 | UX | Cinematic black/teal scenario map exposes the bound contract, future selectors, stop rule, verified/stale boundary, STT/TestUSDC funding sequence, explicit order review, actionable provider errors, position lifecycle, and durable closed-position history | Desktop/mobile clean-browser recording plus injected-wallet retry | Verified for the primary public workflow: real wallet fills, redemption, continuation, and hard stop are indexed; desktop/mobile read-only views passed responsive QA. A final captioned recording remains outstanding |
 | Deployment | Public frontend and API serving the intended revision | Health check, revision endpoint, primary-flow browser check | Verified: `https://branch-somnia.up.railway.app` served the exact GitHub revision, both hashed assets, live market API, position archive, security headers, and guarded wallet entry flow |
-| Source | Public Branch repository with setup and license | GitHub URL and commit | Partial: `https://github.com/nftkingiii/branch` is public with setup, evidence boundary, Railway config, and milestone commits; an explicit project license is still missing |
-| Submission | Working testnet prototype and repository | DoraHacks submission receipt | Missing |
+| Source | Public Branch repository with setup and license | GitHub URL and commit | Verified: `https://github.com/nftkingiii/branch` is public with setup, evidence boundary, Railway config, milestone commits, and an MIT license |
+| Submission | Working testnet prototype, repository, 2–3 minute demo, and SDK feedback | DoraHacks submission receipt | Partial: prototype, repository, submission draft, demo script/captions, and `FEEDBACK.md` are ready; final video URL and DoraHacks submission receipt are missing |
 
 ## Proof boundary
 

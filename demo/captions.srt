@@ -1,0 +1,39 @@
+1
+00:00:00,000 --> 00:00:18,000
+Prediction markets trade one event at a time. Branch expresses a conditional path across them.
+
+2
+00:00:18,000 --> 00:00:42,000
+Choose the cadence, risk cap, collateral, and expected outcome for each leg. Only leg one is bound now.
+
+3
+00:00:42,000 --> 00:01:02,000
+Before signing, Branch verifies the exact market generation, status, expiry, order grid, and live liquidity.
+
+4
+00:01:02,000 --> 00:01:16,000
+This real BTC 15m DOWN order filled on DreamDEX and later finalized as the winning outcome.
+
+5
+00:01:16,000 --> 00:01:28,000
+The payout was redeemed on Somnia Shannon. The matching settlement unlocked leg two.
+
+6
+00:01:28,000 --> 00:01:43,000
+Branch binds a different live Event Contract just in time. Future orders are never pre-signed.
+
+7
+00:01:43,000 --> 00:01:55,000
+The original allocation and probability cap remain visible, and leg two needs a fresh wallet signature.
+
+8
+00:01:55,000 --> 00:02:10,000
+Leg two filled UP, but the market finalized DOWN. Branch correctly stopped the remaining path.
+
+9
+00:02:10,000 --> 00:02:18,000
+Fill, settlement, redemption, and P&L evidence remain inspectable after the position closes.
+
+10
+00:02:18,000 --> 00:02:30,000
+Branch turns DreamDEX settlement into a non-custodial conditional trading primitive. Trade the path, not one candle.
