@@ -10,14 +10,14 @@
       "source": ""
     },
     "live_presentation_required": {
-      "status": "unknown",
-      "value": "",
-      "source": ""
+      "status": "confirmed",
+      "value": "false",
+      "source": "Direct organizer confirmation reported by the project owner on 2026-08-26"
     },
     "final_judging_requires_presentation": {
-      "status": "unknown",
-      "value": "",
-      "source": ""
+      "status": "confirmed",
+      "value": "false",
+      "source": "Direct organizer confirmation reported by the project owner on 2026-08-26: there will be no live presentation"
     },
     "demo_day_datetime": {
       "status": "unknown",
@@ -60,6 +60,7 @@
   "notes": [
     "2026-08-26: official Somnia announcements and the DoraHacks-organized Eventbrite listing confirm the submission window runs from August 25 to September 8, but no accessible primary source states the exact September 8 cutoff time or timezone.",
     "2026-08-26: the accessible event listing confirms an online event and a 5000 USDso prize pool; no accessible official source currently confirms whether a live presentation is required, whether attendance controls final judging, or any demo-day logistics.",
-    "2026-08-26: required package from the downloaded DoraHacks page is a working testnet prototype, public GitHub repository, 2-3 minute demo video, and SDK/documentation feedback report."
+    "2026-08-26: required package from the downloaded DoraHacks page is a working testnet prototype, public GitHub repository, 2-3 minute demo video, and SDK/documentation feedback report.",
+    "2026-08-26: direct project-owner report after organizer confirmation: there will be no live presentation; presentation attendance is therefore not a final-judging dependency."
   ]
 }

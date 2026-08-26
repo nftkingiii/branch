@@ -1,7 +1,7 @@
 # Project State
 
 Updated: `2026-08-26 17:48 WAT`
-Status: `judge-ready written package prepared; final video and event logistics remain blocking`
+Status: `judge-ready written package prepared; final video, exact cutoff, and submission receipt remain blocking`
 
 ## Goal
 
@@ -97,7 +97,7 @@ Choose and build a differentiated, production-ready testnet product whose core u
 - The earlier dynamic wallet import error was a stale-release mismatch: removed `/assets/wallet-BJ1YseQV.js` was incorrectly served as SPA `text/html` with HTTP 200, while HTML had no explicit cache policy. Release `6c61eec` fixed this: HTML is `no-store`, hashed assets are immutable, and missing `/assets/*` requests return true no-store JSON 404 responses.
 - Real continuation proof is complete. Leg one bought BTC 15m DOWN in market `0x...a11d` through transaction `0x2a454a837ceff6266df5e9dce82ddef97e8c59be52a6d8bff69b3211b8558635`, settled DOWN, realized `+16.661233` tUSDC, and was redeemed in `0x9e30adc3d2a966ab1c49d071aba176ab61cd8cbaf6b80f76723789de32417fd9`. Branch then bound different market `0x...a143` and the wallet signed leg-two UP fill `0xe439f1b241bfbbb21dcd94d098003e733c25ba977245c185a2a7d8d3c495ca2c`; three fills totaled `666.666` YES tokens with `18.02331` tUSDC cost basis. That market finalized DOWN, so leg two lost, its payout is zero, and the branch correctly stopped. The two-leg path net position result was `-1.362077` tUSDC before gas.
 - Added the MIT license, current README architecture/evidence links, `SUBMISSION.md`, sponsor-facing `FEEDBACK.md`, and a 2:30 muted-playback demo script with editable SRT captions. These are prepared artifacts, not evidence that a final video has been recorded or submitted.
-- Current official/event-organizer-linked sources confirm the event runs online with submissions from August 25 through September 8 and a 5000 USDso pool. Exact cutoff time/timezone, presentation attendance, judging dependency, demo-day details, and fallback remain unknown and block the deterministic event gate.
+- Current official/event-organizer-linked sources confirm the event runs online with submissions from August 25 through September 8 and a 5000 USDso pool. Direct user report after organizer confirmation: no live presentation is required and presentation attendance does not control final judging. Exact cutoff time/timezone and the eventual submission receipt remain unresolved.
 
 ## Sources
 
