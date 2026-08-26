@@ -1,7 +1,7 @@
 # Project State
 
-Updated: `2026-08-26 12:12 WAT`
-Status: `wallet-approved continuation release is deployed; a real second-leg fill remains unproven`
+Updated: `2026-08-26 12:40 WAT`
+Status: `continuation failure diagnosed; resilient error and asset-cache release pending deployment`
 
 ## Goal
 
@@ -92,6 +92,9 @@ Choose and build a differentiated, production-ready testnet product whose core u
 - Public-repository security remediation updated Vite to `7.3.6` and Vitest to `3.2.7`. Full `npm audit` returned zero vulnerabilities, and all 127 installed packages had verified registry signatures; 65 also had provenance attestations.
 - Conditional continuation release `92127a2` deployed successfully on Railway and `/api/health` returned the exact source revision. The live homepage referenced the new `index-UCQ4uMNe.js` asset, returned 12 verified markets, retained CSP/HSTS, and passed clean disconnected-state browser inspection.
 - Continuation state tests cover verified wins, mismatches, and missing evidence; the full suite now passes 29 tests across 8 files. A real wallet-signed leg-two fill and subsequent position read-back are still required before calling the multi-leg path proven.
+- Wallet `0x8aab...4c4` produced a new confirmed BTC 15m DOWN fill `0x2a454a837ceff6266df5e9dce82ddef97e8c59be52a6d8bff69b3211b8558635`, later redeemed in `0x9e30adc3d2a966ab1c49d071aba176ab61cd8cbaf6b80f76723789de32417fd9`; this is the new branch's first leg, not continuation proof.
+- Two attempted leg-two transactions (`0x94c0615ee4e599ed492b6d7269126166b0ede159710e3eef9b0b18e588b4bba5` and `0x40cca5c767cc46a8d58ef1bf81d5c2156edbe55920c28dc992aa86c5f1e4430d`) reached the DreamDEX router and reverted. Parent-block replay returned selector `0xd48c4403`, decoded against the SDK contract-error table as `ImmediateOrCancelNoFill()`: approval succeeded, but quoted liquidity moved before IOC execution, and no leg-two position was created.
+- The earlier dynamic wallet import error was a stale-release mismatch: removed `/assets/wallet-BJ1YseQV.js` was incorrectly served as SPA `text/html` with HTTP 200, while HTML had no explicit cache policy. The pending fix makes HTML `no-store`, hashed assets immutable, and missing `/assets/*` requests true no-store 404 responses.
 
 ## Sources
 

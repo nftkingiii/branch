@@ -28,6 +28,27 @@ function providerErrorMessages(error: unknown): string[] {
   return messages;
 }
 
+export function isImmediateOrCancelNoFillError(error: unknown): boolean {
+  let current: unknown = error;
+  for (let depth = 0; depth < 6; depth += 1) {
+    if (typeof current === "string") {
+      const value = current.toLowerCase();
+      if (value.includes("immediateorcancelnofill") || value.includes("0xd48c4403")) return true;
+      return false;
+    }
+    const record = asRecord(current);
+    if (!record) return false;
+    if (typeof record.message === "string") {
+      const message = record.message.toLowerCase();
+      if (message.includes("immediateorcancelnofill") || message.includes("0xd48c4403")) return true;
+    }
+    if (record.errorName === "ImmediateOrCancelNoFill") return true;
+    const candidates = [record.cause, record.data, record.originalError, record.details];
+    current = candidates.find((candidate) => candidate != null);
+  }
+  return false;
+}
+
 export function isUnrecognizedChainError(error: unknown): boolean {
   if (providerErrorCode(error) === 4902) return true;
   return providerErrorMessages(error).some((message) =>

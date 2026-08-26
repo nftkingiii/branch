@@ -4,6 +4,7 @@ import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 import { fetchVerifiedMarkets, fetchWalletPositions, verifyExecutionMarket } from "./dreamdex.js";
 import { parseExecutionGuardQuery } from "./execution-guard.js";
+import { shouldUseSpaFallback, staticCacheControl } from "./static-policy.js";
 import { validateRpcRequest } from "./rpc-proxy.js";
 import { parsePositionAccount } from "../shared/positions.js";
 
@@ -158,12 +159,20 @@ const server = createServer(async (req, res) => {
   try {
     if (!(await stat(filePath)).isFile()) throw new Error("not a file");
   } catch {
+    if (!shouldUseSpaFallback(rawPath)) {
+      res.writeHead(404, applyHeaders({ "Content-Type": "application/json", "Cache-Control": "no-store" }));
+      return res.end(JSON.stringify({ error: "Asset not found" }));
+    }
     filePath = join(dist, "index.html");
   }
 
   try {
     const body = await readFile(filePath);
-    res.writeHead(200, applyHeaders({ "Content-Type": mime[extname(filePath)] ?? "application/octet-stream" }));
+    const servedPath = filePath.endsWith("index.html") ? "/index.html" : rawPath;
+    res.writeHead(200, applyHeaders({
+      "Content-Type": mime[extname(filePath)] ?? "application/octet-stream",
+      "Cache-Control": staticCacheControl(servedPath),
+    }));
     return res.end(body);
   } catch {
     res.writeHead(404, applyHeaders());

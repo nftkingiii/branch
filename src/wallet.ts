@@ -4,7 +4,7 @@ import { createExecutionIntent } from "../shared/execution.js";
 import { quoteFillableFirstLeg } from "../shared/liquidity.js";
 import type { BranchPlan } from "../shared/branch.js";
 import type { PositionSnapshot, PositionsResponse } from "../shared/positions.js";
-import { describeWalletError, isUnrecognizedChainError } from "../shared/provider-error.js";
+import { describeWalletError, isImmediateOrCancelNoFillError, isUnrecognizedChainError } from "../shared/provider-error.js";
 
 export const SOMNIA_CHAIN_ID = 50312;
 const RPC_URL = "https://api.infra.testnet.somnia.network";
@@ -212,9 +212,8 @@ export async function executeBoundLeg(plan: BranchPlan, session: WalletSession):
       autoApprove: true,
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    if (message.includes("ImmediateOrCancelNoFill")) {
-      throw new Error("Liquidity moved before the IOC reached DreamDEX, so nothing filled. Refresh the branch and retry; no position was created.");
+    if (isImmediateOrCancelNoFillError(error)) {
+      throw new Error("The order reached DreamDEX, but the quoted liquidity moved before execution. The IOC reverted and no position was created. Reopen Review next leg to fetch a fresh market book before signing again.");
     }
     throw error;
   }

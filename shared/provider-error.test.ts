@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { describeWalletError, isUnrecognizedChainError, providerErrorCode } from "./provider-error.js";
+import { describeWalletError, isImmediateOrCancelNoFillError, isUnrecognizedChainError, providerErrorCode } from "./provider-error.js";
 
 describe("wallet provider errors", () => {
   it("extracts nested EIP-1193 error codes", () => {
@@ -19,5 +19,11 @@ describe("wallet provider errors", () => {
       code: -32603,
       message: 'Unrecognized chain ID "0xc488". Try adding the chain first.',
     })).toBe(true);
+  });
+
+  it("recognizes nested and selector-only IOC no-fill reverts", () => {
+    expect(isImmediateOrCancelNoFillError({ cause: { errorName: "ImmediateOrCancelNoFill" } })).toBe(true);
+    expect(isImmediateOrCancelNoFillError({ data: "0xd48c4403" })).toBe(true);
+    expect(isImmediateOrCancelNoFillError(new Error("placeBinaryOrder reverted: ImmediateOrCancelNoFill()"))).toBe(true);
   });
 });
