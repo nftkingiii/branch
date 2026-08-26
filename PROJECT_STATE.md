@@ -1,7 +1,7 @@
 # Project State
 
-Updated: `2026-08-26 10:56 WAT`  
-Status: `winning redemption and losing settlement persist in the closed-position archive`
+Updated: `2026-08-26 11:20 WAT`  
+Status: `public GitHub source and revision-verified Railway deployment are live`
 
 ## Goal
 
@@ -85,6 +85,11 @@ Choose and build a differentiated, production-ready testnet product whose core u
 - Live `/api/positions` verification returned two closed records: the claimed BTC 15m DOWN winner with linked fill and claim transactions, and the BTC 15m DOWN loser with `-24.67179` tUSDC realized PnL and no payout.
 - Browser QA rendered both archived rows at 1280px and 390x844. The mobile document and each history row stayed within the viewport. A temporary mock EIP-1193 provider exposed the connected read-only screen only; it was configured to reject signing and submitted no transaction.
 - Verification: 27 tests passed across 7 files and the production build completed with 629 modules transformed. The existing wallet chunk-size warning remains non-blocking.
+- Public source: `https://github.com/nftkingiii/branch` on `main`, created with separate application, Railway release, production-header, and toolchain-security milestone commits.
+- Public deployment: `https://branch-production-045a.up.railway.app`. Railway is connected to `nftkingiii/branch` for GitHub autodeploys and gates releases with `/api/health`.
+- Live release verification matched Railway deployment `5fc7125b-02d4-4b4a-93d6-782cc7ad0b1a` to source revision `e09eac137bdde6c8a6bc2c1a88615e860224b975`; homepage, both hashed assets, 12 verified markets, two closed-history rows, CSP, HSTS, and the RPC write deny rule all passed.
+- Clean public-browser QA loaded the Overview and live Shannon status with no console warnings/errors. With no injected wallet, Compose stayed gated and displayed the expected actionable wallet message; no signing or transaction was attempted.
+- Public-repository security remediation updated Vite to `7.3.6` and Vitest to `3.2.7`. Full `npm audit` returned zero vulnerabilities, and all 127 installed packages had verified registry signatures; 65 also had provenance attestations.
 
 ## Sources
 
@@ -98,7 +103,7 @@ Choose and build a differentiated, production-ready testnet product whose core u
 ## Current Work
 
 - Complete: read-only scenario composer, verified-market API, termination-state logic, reference-led responsive visual system, provider-error diagnostics, wallet review flow, STT/TestUSDC funding UX, disconnected-state QA, and on-chain-checked Positions lifecycle UI.
-- Next: implement and prove the second wallet-approved leg after a winning first-leg settlement; public deployment and submission evidence remain open.
+- Next: implement and prove the second wallet-approved leg after a winning first-leg settlement; choose a repository license and complete submission evidence.
 
 ## Resume Notes
 
