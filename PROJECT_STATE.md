@@ -1,7 +1,7 @@
 # Project State
 
-Updated: `2026-08-26 12:01 WAT`
-Status: `second-leg continuation implemented locally; public deployment still points to the prior verified revision`
+Updated: `2026-08-26 12:12 WAT`
+Status: `wallet-approved continuation release is deployed; a real second-leg fill remains unproven`
 
 ## Goal
 
@@ -90,6 +90,8 @@ Choose and build a differentiated, production-ready testnet product whose core u
 - Live release verification matched Railway deployment `5fc7125b-02d4-4b4a-93d6-782cc7ad0b1a` to source revision `e09eac137bdde6c8a6bc2c1a88615e860224b975`; homepage, both hashed assets, 12 verified markets, two closed-history rows, CSP, HSTS, and the RPC write deny rule all passed.
 - Clean public-browser QA loaded the Overview and live Shannon status with no console warnings/errors. With no injected wallet, Compose stayed gated and displayed the expected actionable wallet message; no signing or transaction was attempted.
 - Public-repository security remediation updated Vite to `7.3.6` and Vitest to `3.2.7`. Full `npm audit` returned zero vulnerabilities, and all 127 installed packages had verified registry signatures; 65 also had provenance attestations.
+- Conditional continuation release `92127a2` deployed successfully on Railway and `/api/health` returned the exact source revision. The live homepage referenced the new `index-UCQ4uMNe.js` asset, returned 12 verified markets, retained CSP/HSTS, and passed clean disconnected-state browser inspection.
+- Continuation state tests cover verified wins, mismatches, and missing evidence; the full suite now passes 29 tests across 8 files. A real wallet-signed leg-two fill and subsequent position read-back are still required before calling the multi-leg path proven.
 
 ## Sources
 
@@ -103,8 +105,8 @@ Choose and build a differentiated, production-ready testnet product whose core u
 ## Current Work
 
 - Complete: read-only scenario composer, verified-market API, termination-state logic, reference-led responsive visual system, provider-error diagnostics, wallet review flow, STT/TestUSDC funding UX, disconnected-state QA, and on-chain-checked Positions lifecycle UI.
-- Implemented locally: a schema-validated multi-leg execution ledger and continuation queue. A finalized matching outcome unlocks the next leg; Branch then binds a different freshly verified market generation, shows the retained allocation/cap for explicit acknowledgement, and requires a new wallet-signed IOC transaction. Missing evidence, loss, or void fails closed.
-- Next: browser-QA and deploy the continuation UI, then prove leg 2 with a real testnet fill and on-chain read-back; choose a repository license and complete submission evidence.
+- Deployed: a schema-validated multi-leg execution ledger and continuation queue. A finalized matching outcome unlocks the next leg; Branch then binds a different freshly verified market generation, shows the retained allocation/cap for explicit acknowledgement, and requires a new wallet-signed IOC transaction. Missing evidence, loss, or void fails closed.
+- Next: prove leg 2 with a real testnet fill and on-chain read-back; choose a repository license and complete submission evidence.
 
 ## Resume Notes
 
