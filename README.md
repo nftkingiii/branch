@@ -30,6 +30,7 @@ fresh market + new wallet signature       hard stop + closed history
 
 - Live application: https://branch-somnia.up.railway.app
 - Demo video: https://youtu.be/bVF__RJWFJ0
+- DoraHacks submission receipt: [`evidence/dorahacks-submission-confirmation-2026-08-27.png`](evidence/dorahacks-submission-confirmation-2026-08-27.png)
 - Submission draft: [`SUBMISSION.md`](SUBMISSION.md)
 - SDK feedback: [`FEEDBACK.md`](FEEDBACK.md)
 - Proof matrix: [`PROOF_MATRIX.md`](PROOF_MATRIX.md)

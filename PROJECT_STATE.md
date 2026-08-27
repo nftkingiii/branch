@@ -1,7 +1,7 @@
 # Project State
 
-Updated: `2026-08-27 09:05 WAT`
-Status: `judge-ready public package prepared; DoraHacks submission and receipt remain blocking`
+Updated: `2026-08-27 WAT`
+Status: `submitted to DoraHacks and under review; judging outcome pending`
 
 ## Goal
 
@@ -100,7 +100,8 @@ Choose and build a differentiated, production-ready testnet product whose core u
 - Added the MIT license, current README architecture/evidence links, final `SUBMISSION.md`, sponsor-facing `FEEDBACK.md`, and reproducible demo production assets with editable captions and narration.
 - Overview now explains Branch as bind, resolve, then continue-or-stop and presents the verified two-leg Shannon run with direct explorer links, exact realized values, and the leg-two hard stop. Local browser QA at 1280px confirmed one instance of each section, aligned proof geometry, and zero document-level horizontal overflow; 32 tests passed and the production build completed with 630 modules transformed.
 - Final demo `outputs/branch-demo-final.mp4` was rebuilt from the user's authentic 1:48 workflow capture with branded bookends, scene-aligned Microsoft Zira narration, burned-in captions, and an editable SRT sidecar. Fresh local verification reports 1920x1080 H.264 at 30 fps, 48 kHz AAC audio, 120.262 seconds, 18,139,315 bytes, and a full decode with no ffmpeg errors. Direct user report plus public URL verification on 2026-08-27 confirms it is published at `https://youtu.be/bVF__RJWFJ0` with the title `Branch`.
-- Current official/event-organizer-linked sources confirm the event runs online with a 5000 USDso pool. Direct DoraHacks schedule readout supplied by the user confirms the deadline as September 8, 2026 at 19:00 WAT (`18:00 UTC`). Direct user report after organizer confirmation: no live presentation is required and presentation attendance does not control final judging. Only the DoraHacks submission and its receipt remain unresolved.
+- Current official/event-organizer-linked sources confirm the event runs online with a 5000 USDso pool. Direct DoraHacks schedule readout supplied by the user confirms the deadline as September 8, 2026 at 19:00 WAT (`18:00 UTC`). Direct user report after organizer confirmation: no live presentation is required and presentation attendance does not control final judging.
+- DoraHacks submission confirmation supplied by the user on 2026-08-27 shows `BUIDL Submitted`, identifies Branch and the Event Contracts Hackathon, and marks the project under review. The receipt is preserved at `evidence/dorahacks-submission-confirmation-2026-08-27.png`.
 
 ## Sources
 
@@ -115,7 +116,7 @@ Choose and build a differentiated, production-ready testnet product whose core u
 
 - Complete: read-only scenario composer, verified-market API, termination-state logic, reference-led responsive visual system, provider-error diagnostics, wallet review flow, STT/TestUSDC funding UX, disconnected-state QA, and on-chain-checked Positions lifecycle UI.
 - Deployed: a schema-validated multi-leg execution ledger and continuation queue. A finalized matching outcome unlocks the next leg; Branch then binds a different freshly verified market generation, shows the retained allocation/cap for explicit acknowledgement, and requires a new wallet-signed IOC transaction. Missing evidence, loss, or void fails closed.
-- Next: paste the prepared fields into DoraHacks, submit, and preserve the submission URL or confirmation screenshot.
+- Next: monitor DoraHacks status and organizer updates; preserve judge feedback, scoring, or the final result when available.
 
 ## Resume Notes
 

@@ -45,9 +45,9 @@
       "source": ""
     },
     "submission_confirmation": {
-      "status": "unknown",
-      "value": "",
-      "source": ""
+      "status": "confirmed",
+      "value": "Branch submitted to the Event Contracts Hackathon and under review",
+      "source": "DoraHacks confirmation screenshot supplied by the project owner on 2026-08-27 and preserved at evidence/dorahacks-submission-confirmation-2026-08-27.png"
     }
   },
   "reminders": {
@@ -63,6 +63,7 @@
     "2026-08-26: required package from the downloaded DoraHacks page is a working testnet prototype, public GitHub repository, 2-3 minute demo video, and SDK/documentation feedback report.",
     "2026-08-27: final 2:00 narrated and captioned demo published at https://youtu.be/bVF__RJWFJ0; public URL resolves to YouTube title Branch.",
     "2026-08-26: direct project-owner report after organizer confirmation: there will be no live presentation; presentation attendance is therefore not a final-judging dependency."
-    ,"2026-08-26: direct DoraHacks schedule readout supplied by the project owner shows Submission 2026/08/25 01:00 and Deadline 2026/09/08 19:00; recorded as WAT because the owner timezone and browser context are Africa/Lagos."
+    ,"2026-08-26: direct DoraHacks schedule readout supplied by the project owner shows Submission 2026/08/25 01:00 and Deadline 2026/09/08 19:00; recorded as WAT because the owner timezone and browser context are Africa/Lagos.",
+    "2026-08-27: DoraHacks displayed BUIDL Submitted for Branch, identified the Event Contracts Hackathon, and marked the project under review; the receipt is preserved at evidence/dorahacks-submission-confirmation-2026-08-27.png."
   ]
 }
