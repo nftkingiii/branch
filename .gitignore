@@ -7,6 +7,7 @@ dist/
 *.key
 work/
 outputs/
+demo/source-frames/
 coverage/
 *.log
 *.tsbuildinfo

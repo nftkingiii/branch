@@ -1,0 +1,44 @@
+1
+00:00:00,000 --> 00:00:05,000
+Branch — conditional Event Contract paths.
+Trade the path, not one candle.
+
+2
+00:00:05,000 --> 00:00:21,000
+One thesis. Multiple markets.
+Continue only while reality matches.
+
+3
+00:00:21,000 --> 00:00:42,000
+Choose the window, collateral, probability cap,
+and expected outcome for each leg.
+
+4
+00:00:42,000 --> 00:01:01,000
+Only leg one is live. Every wallet prompt follows
+a fresh on-chain and liquidity check.
+
+5
+00:01:01,000 --> 00:01:18,000
+Leg two filled UP. The market settled DOWN.
+Branch stopped the remaining path.
+
+6
+00:01:18,000 --> 00:01:34,000
+Exact fills remain inspectable after settlement.
+
+7
+00:01:34,000 --> 00:01:49,000
+Closed winners and losses retain realized P&L
+and transaction evidence.
+
+8
+00:01:49,000 --> 00:01:53,500
+A matching settlement unlocks the next signature.
+A miss creates a hard stop.
+
+9
+00:01:53,500 --> 00:02:01,000
+Real two-leg DreamDEX testnet proof.
+branch-somnia.up.railway.app
+

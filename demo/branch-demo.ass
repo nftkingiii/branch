@@ -1,0 +1,32 @@
+[Script Info]
+Title: Branch demo captions
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Title,Bahnschrift SemiLight,82,&H00F5FAF8,&H000000FF,&H00030807,&H00030807,0,0,0,0,90,100,-3,0,1,0,0,7,120,120,160,1
+Style: Kicker,Bahnschrift,20,&H009BDED5,&H000000FF,&H00030807,&H00030807,1,0,0,0,100,100,3,0,1,0,0,7,125,125,120,1
+Style: Caption,Bahnschrift SemiLight,34,&H00F0F8F6,&H000000FF,&H00030807,&HCC030807,0,0,0,0,96,100,0,0,3,0,0,2,170,170,64,1
+Style: Small,Bahnschrift,21,&H0096B1AA,&H000000FF,&H00030807,&H00030807,0,0,0,0,100,100,1,0,1,0,0,1,125,125,92,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:05.00,Kicker,,0,0,0,,CONDITIONAL EVENT CONTRACT PATHS
+Dialogue: 0,0:00:00.30,0:00:05.00,Title,,0,0,0,,Trade the path,\Nnot one candle.
+Dialogue: 0,0:00:00.60,0:00:05.00,Small,,0,0,0,,BRANCH  /  SOMNIA SHANNON TESTNET
+Dialogue: 0,0:00:05.00,0:00:21.00,Caption,,0,0,0,,One thesis. Multiple markets. Continue only while reality matches.
+Dialogue: 0,0:00:21.00,0:00:42.00,Caption,,0,0,0,,Choose the window, collateral, probability cap, and expected outcome for each leg.
+Dialogue: 0,0:00:42.00,0:01:01.00,Caption,,0,0,0,,Only leg one is live. Every wallet prompt follows a fresh on-chain and liquidity check.
+Dialogue: 0,0:01:01.00,0:01:18.00,Caption,,0,0,0,,Leg two filled UP. The market settled DOWN. Branch stopped the remaining path.
+Dialogue: 0,0:01:18.00,0:01:34.00,Caption,,0,0,0,,Exact fills remain inspectable after settlement.
+Dialogue: 0,0:01:34.00,0:01:49.00,Caption,,0,0,0,,Closed winners and losses retain realized P&L and transaction evidence.
+Dialogue: 0,0:01:49.00,0:01:53.50,Caption,,0,0,0,,A matching settlement unlocks the next signature. A miss creates a hard stop.
+Dialogue: 0,0:01:53.50,0:02:01.00,Kicker,,0,0,0,,LIVE APP  /  BRANCH-SOMNIA.UP.RAILWAY.APP
+Dialogue: 0,0:01:53.80,0:02:01.00,Title,,0,0,0,,Trade the path,\Nnot one candle.
+Dialogue: 0,0:01:54.10,0:02:01.00,Small,,0,0,0,,REAL TWO-LEG DREAMDEX TESTNET PROOF  /  GITHUB.COM/NFTKINGIII/BRANCH
+
