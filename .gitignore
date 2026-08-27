@@ -11,3 +11,9 @@ demo/source-frames/
 coverage/
 *.log
 *.tsbuildinfo
+
+# Internal hack operations (keep local; do not publish)
+.private/
+HACK_EVENT_GATE.json
+ORGANIZER_QUESTIONS.md
+PROJECT_STATE.md

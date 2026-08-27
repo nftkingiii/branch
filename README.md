@@ -30,12 +30,10 @@ fresh market + new wallet signature       hard stop + closed history
 
 - Live application: https://branch-somnia.up.railway.app
 - Demo video: https://youtu.be/bVF__RJWFJ0
-- DoraHacks submission receipt: [`evidence/dorahacks-submission-confirmation-2026-08-27.png`](evidence/dorahacks-submission-confirmation-2026-08-27.png)
 - Submission draft: [`SUBMISSION.md`](SUBMISSION.md)
 - SDK feedback: [`FEEDBACK.md`](FEEDBACK.md)
 - Proof matrix: [`PROOF_MATRIX.md`](PROOF_MATRIX.md)
 - Demo production kit: [`demo/narration-script.md`](demo/narration-script.md), [`demo/branch-demo.srt`](demo/branch-demo.srt), [`demo/render-demo.ps1`](demo/render-demo.ps1)
-- Open event-logistics questions: [`ORGANIZER_QUESTIONS.md`](ORGANIZER_QUESTIONS.md)
 
 ## Local development
 
@@ -73,4 +71,4 @@ MIT — see [`LICENSE`](LICENSE).
 
 ## Evidence boundary
 
-A real two-leg conditional path is verified on Somnia Shannon: a winning first leg unlocked a newly bound, wallet-approved second leg; that second order filled and later stopped after settling against the expected outcome. Exact fills, redemption, settlement states, and earlier adverse attempts are documented in `PROJECT_STATE.md` and `PROOF_MATRIX.md`. A public deployment does not change the prototype's testnet status.
+A real two-leg conditional path is verified on Somnia Shannon: a winning first leg unlocked a newly bound, wallet-approved second leg; that second order filled and later stopped after settling against the expected outcome. Exact fills, redemption, settlement states, and earlier adverse attempts are summarized in `PROOF_MATRIX.md`. A public deployment does not change the prototype's testnet status.
