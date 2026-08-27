@@ -2,7 +2,7 @@
   "project": "Branch",
   "hackathon": "Somnia x DreamDEX Event Contracts Hackathon",
   "owner_timezone": "Africa/Lagos",
-  "event_contact": "",
+  "event_contact": "Somnia x DreamDEX organizer team via DoraHacks",
   "requirements": {
     "submission_deadline": {
       "status": "confirmed",
@@ -61,6 +61,7 @@
     "2026-08-26: official Somnia announcements and the DoraHacks-organized Eventbrite listing confirm the submission window runs from August 25 to September 8, but no accessible primary source states the exact September 8 cutoff time or timezone.",
     "2026-08-26: the accessible event listing confirms an online event and a 5000 USDso prize pool; no accessible official source currently confirms whether a live presentation is required, whether attendance controls final judging, or any demo-day logistics.",
     "2026-08-26: required package from the downloaded DoraHacks page is a working testnet prototype, public GitHub repository, 2-3 minute demo video, and SDK/documentation feedback report.",
+    "2026-08-27: final 2:00 narrated and captioned demo published at https://youtu.be/bVF__RJWFJ0; public URL resolves to YouTube title Branch.",
     "2026-08-26: direct project-owner report after organizer confirmation: there will be no live presentation; presentation attendance is therefore not a final-judging dependency."
     ,"2026-08-26: direct DoraHacks schedule readout supplied by the project owner shows Submission 2026/08/25 01:00 and Deadline 2026/09/08 19:00; recorded as WAT because the owner timezone and browser context are Africa/Lagos."
   ]

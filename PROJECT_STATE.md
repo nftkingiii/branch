@@ -1,7 +1,7 @@
 # Project State
 
-Updated: `2026-08-27 08:15 WAT`
-Status: `judge-ready package and final local demo prepared; video publication and submission receipt remain blocking`
+Updated: `2026-08-27 09:05 WAT`
+Status: `judge-ready public package prepared; DoraHacks submission and receipt remain blocking`
 
 ## Goal
 
@@ -13,7 +13,7 @@ Choose and build a differentiated, production-ready testnet product whose core u
 - Verified fact: judging weights are Technical Implementation 25%, Innovation 20%, UX 20%, Business and Ecosystem Impact 20%, and Presentation and Demo 15%.
 - Verified fact: DreamDEX Event Contracts are binary Up/Down BTC and ETH markets using `@somnia-chain/markets-sdk` on Somnia Shannon testnet (chain ID 50312).
 - Verified fact: positions must be claimed after settlement; market status, venue IDs, expiry, tick/lot sizing, and indexer lag are consequential integration constraints.
-- Direct user report: event time-zone and presentation requirements are currently unknown; follow updates on DoraHacks rather than infer them.
+- Direct user report: the DoraHacks deadline is September 8, 2026 at 19:00 WAT, and organizer confirmation says there is no live presentation or presentation-based judging dependency.
 - Direct user decision: Branch is the approved product direction.
 
 ## Decisions
@@ -97,10 +97,10 @@ Choose and build a differentiated, production-ready testnet product whose core u
 - Two attempted leg-two transactions (`0x94c0615ee4e599ed492b6d7269126166b0ede159710e3eef9b0b18e588b4bba5` and `0x40cca5c767cc46a8d58ef1bf81d5c2156edbe55920c28dc992aa86c5f1e4430d`) reached the DreamDEX router and reverted. Parent-block replay returned selector `0xd48c4403`, decoded against the SDK contract-error table as `ImmediateOrCancelNoFill()`: approval succeeded, but quoted liquidity moved before IOC execution, and no leg-two position was created.
 - The earlier dynamic wallet import error was a stale-release mismatch: removed `/assets/wallet-BJ1YseQV.js` was incorrectly served as SPA `text/html` with HTTP 200, while HTML had no explicit cache policy. Release `6c61eec` fixed this: HTML is `no-store`, hashed assets are immutable, and missing `/assets/*` requests return true no-store JSON 404 responses.
 - Real continuation proof is complete. Leg one bought BTC 15m DOWN in market `0x...a11d` through transaction `0x2a454a837ceff6266df5e9dce82ddef97e8c59be52a6d8bff69b3211b8558635`, settled DOWN, realized `+16.661233` tUSDC, and was redeemed in `0x9e30adc3d2a966ab1c49d071aba176ab61cd8cbaf6b80f76723789de32417fd9`. Branch then bound different market `0x...a143` and the wallet signed leg-two UP fill `0xe439f1b241bfbbb21dcd94d098003e733c25ba977245c185a2a7d8d3c495ca2c`; three fills totaled `666.666` YES tokens with `18.02331` tUSDC cost basis. That market finalized DOWN, so leg two lost, its payout is zero, and the branch correctly stopped. The two-leg path net position result was `-1.362077` tUSDC before gas.
-- Added the MIT license, current README architecture/evidence links, `SUBMISSION.md`, sponsor-facing `FEEDBACK.md`, and a 2:30 muted-playback demo script with editable SRT captions. These are prepared artifacts, not evidence that a final video has been recorded or submitted.
+- Added the MIT license, current README architecture/evidence links, final `SUBMISSION.md`, sponsor-facing `FEEDBACK.md`, and reproducible demo production assets with editable captions and narration.
 - Overview now explains Branch as bind, resolve, then continue-or-stop and presents the verified two-leg Shannon run with direct explorer links, exact realized values, and the leg-two hard stop. Local browser QA at 1280px confirmed one instance of each section, aligned proof geometry, and zero document-level horizontal overflow; 32 tests passed and the production build completed with 630 modules transformed.
-- Final local demo `outputs/branch-demo-final.mp4` was rebuilt from the user's authentic 1:48 workflow capture with branded bookends, scene-aligned Microsoft Zira narration, burned-in captions, and an editable SRT sidecar. Fresh verification reports 1920x1080 H.264 at 30 fps, 48 kHz AAC audio, 120.262 seconds, 18,139,315 bytes, and a full decode with no ffmpeg errors. This is a prepared local artifact, not evidence that the video has been uploaded or submitted.
-- Current official/event-organizer-linked sources confirm the event runs online with a 5000 USDso pool. Direct DoraHacks schedule readout supplied by the user confirms the deadline as September 8, 2026 at 19:00 WAT (`18:00 UTC`). Direct user report after organizer confirmation: no live presentation is required and presentation attendance does not control final judging. Video publication and the eventual submission receipt remain unresolved.
+- Final demo `outputs/branch-demo-final.mp4` was rebuilt from the user's authentic 1:48 workflow capture with branded bookends, scene-aligned Microsoft Zira narration, burned-in captions, and an editable SRT sidecar. Fresh local verification reports 1920x1080 H.264 at 30 fps, 48 kHz AAC audio, 120.262 seconds, 18,139,315 bytes, and a full decode with no ffmpeg errors. Direct user report plus public URL verification on 2026-08-27 confirms it is published at `https://youtu.be/bVF__RJWFJ0` with the title `Branch`.
+- Current official/event-organizer-linked sources confirm the event runs online with a 5000 USDso pool. Direct DoraHacks schedule readout supplied by the user confirms the deadline as September 8, 2026 at 19:00 WAT (`18:00 UTC`). Direct user report after organizer confirmation: no live presentation is required and presentation attendance does not control final judging. Only the DoraHacks submission and its receipt remain unresolved.
 
 ## Sources
 
@@ -115,7 +115,7 @@ Choose and build a differentiated, production-ready testnet product whose core u
 
 - Complete: read-only scenario composer, verified-market API, termination-state logic, reference-led responsive visual system, provider-error diagnostics, wallet review flow, STT/TestUSDC funding UX, disconnected-state QA, and on-chain-checked Positions lifecycle UI.
 - Deployed: a schema-validated multi-leg execution ledger and continuation queue. A finalized matching outcome unlocks the next leg; Branch then binds a different freshly verified market generation, shows the retained allocation/cap for explicit acknowledgement, and requires a new wallet-signed IOC transaction. Missing evidence, loss, or void fails closed.
-- Next: review and publish the completed captioned two-leg demo, paste its URL into the submission, submit on DoraHacks, and preserve the receipt.
+- Next: paste the prepared fields into DoraHacks, submit, and preserve the submission URL or confirmation screenshot.
 
 ## Resume Notes
 

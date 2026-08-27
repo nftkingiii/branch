@@ -39,6 +39,7 @@ Net path result: `-1.362077` tUSDC before gas. The loss is useful proof: Branch 
 
 - Live application: https://branch-somnia.up.railway.app
 - Source: https://github.com/nftkingiii/branch
+- Demo video: https://youtu.be/bVF__RJWFJ0
 - Network: Somnia Shannon testnet (`50312`)
 - SDK feedback: `FEEDBACK.md`
 - Detailed proof boundary: `PROOF_MATRIX.md`

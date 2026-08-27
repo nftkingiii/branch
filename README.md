@@ -29,10 +29,11 @@ fresh market + new wallet signature       hard stop + closed history
 ## Public evidence
 
 - Live application: https://branch-somnia.up.railway.app
+- Demo video: https://youtu.be/bVF__RJWFJ0
 - Submission draft: [`SUBMISSION.md`](SUBMISSION.md)
 - SDK feedback: [`FEEDBACK.md`](FEEDBACK.md)
 - Proof matrix: [`PROOF_MATRIX.md`](PROOF_MATRIX.md)
-- Demo script and captions: [`demo/DEMO_SCRIPT.md`](demo/DEMO_SCRIPT.md), [`demo/captions.srt`](demo/captions.srt)
+- Demo production kit: [`demo/narration-script.md`](demo/narration-script.md), [`demo/branch-demo.srt`](demo/branch-demo.srt), [`demo/render-demo.ps1`](demo/render-demo.ps1)
 - Open event-logistics questions: [`ORGANIZER_QUESTIONS.md`](ORGANIZER_QUESTIONS.md)
 
 ## Local development
