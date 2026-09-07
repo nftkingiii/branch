@@ -43,7 +43,7 @@ export interface MarketResponse {
 export async function fetchVerifiedMarkets(): Promise<MarketResponse> {
   const fetchedAt = new Date();
   const now = Math.floor(fetchedAt.getTime() / 1000);
-  const rows = await exchange.client.listBinaryMarkets({ status: "Trading", limit: 50 });
+  const rows = await exchange.client.listLiveBinaryMarkets({ status: "Trading", limit: 50 });
   const excluded = { expired: 0, unverified: 0, notTradingOnchain: 0 };
   const markets: LiveMarket[] = [];
 
