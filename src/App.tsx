@@ -48,7 +48,7 @@ export function App() {
   const [marketError, setMarketError] = useState("");
   const [loading, setLoading] = useState(true);
   const [asset, setAsset] = useState<"BTC" | "ETH">("BTC");
-  const [intervalSec, setIntervalSec] = useState(900);
+  const [intervalSec, setIntervalSec] = useState(60);
   const [budget, setBudget] = useState(90);
   const [maxEntryPrice, setMaxEntryPrice] = useState(0.72);
   const [path, setPath] = useState<Outcome[]>(["DOWN", "UP", "UP"]);
@@ -304,7 +304,7 @@ export function App() {
             <label>
               <span className="field-label">Window</span>
               <select value={intervalSec} onChange={(event) => { setIntervalSec(Number(event.target.value)); setPlan(null); }} disabled={!cadences.length}>
-                {cadences.map((cadence) => <option value={cadence} key={cadence}>{cadenceLabel(cadence)}</option>)}
+                {cadences.map((cadence) => <option value={cadence} key={cadence}>{cadenceLabel(cadence)}{cadence === 60 ? " · Fast demo" : ""}</option>)}
               </select>
             </label>
             <label>

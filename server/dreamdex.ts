@@ -23,6 +23,7 @@ const addresses = {
   marketCreatorFactory: "0xE6bEE93cE87c9E6e62aCb621caa7832EE47b4F6B",
   oracleHub: "0xe40db387cC98601Dd11bd634fF2f3AD5686dE32b",
 } as const;
+const fastDemoVenueId = "0x1a1e6821cde7d0159c0d293177871e09677b4e42307c7db3ba94f8648a5a050f";
 
 const exchange = new SomniaMarkets({
   indexerUrl: "https://dev.smk.somnia.host/v1/graphql",
@@ -82,7 +83,13 @@ export async function fetchVerifiedMarkets(): Promise<MarketResponse> {
     chainId: 50312,
     source: "DreamDEX Event Contracts",
     fetchedAt: fetchedAt.toISOString(),
-    markets: markets.sort((a, b) => a.intervalSec - b.intervalSec || a.asset.localeCompare(b.asset)),
+    markets: markets.sort((a, b) => {
+      const cadenceOrder = a.intervalSec - b.intervalSec;
+      if (cadenceOrder !== 0) return cadenceOrder;
+      const fastDemoOrder = Number(b.intervalSec === 60 && b.venueId.toLowerCase() === fastDemoVenueId)
+        - Number(a.intervalSec === 60 && a.venueId.toLowerCase() === fastDemoVenueId);
+      return fastDemoOrder || a.asset.localeCompare(b.asset);
+    }),
     excluded,
   };
 }
