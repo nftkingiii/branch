@@ -304,7 +304,7 @@ export function App() {
             <label>
               <span className="field-label">Window</span>
               <select value={intervalSec} onChange={(event) => { setIntervalSec(Number(event.target.value)); setPlan(null); }} disabled={!cadences.length}>
-                {cadences.map((cadence) => <option value={cadence} key={cadence}>{cadenceLabel(cadence)}{cadence === 60 ? " · Fast demo" : ""}</option>)}
+                {cadences.map((cadence) => <option value={cadence} key={cadence}>{cadenceLabel(cadence)}</option>)}
               </select>
             </label>
             <label>
